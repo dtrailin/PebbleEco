@@ -136,7 +136,7 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
     switch(t->key) {
 
     case KEY_AQI:
-      snprintf(aqi_buffer, sizeof(aqi_buffer), "%dC", (int)t->value->int32);
+      snprintf(aqi_buffer, sizeof(aqi_buffer), "AQI: %d", (int)t->value->int32);
       break;
 
     case KEY_CITY:
@@ -160,7 +160,7 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
   snprintf(location_buffer, sizeof(location_buffer), "%s, %s", city_buffer, state_buffer);
   text_layer_set_text(s_location_layer, location_buffer);
   
-  
+  text_layer_set_text(s_aqi_layer, aqi_buffer);
   
 }
 
