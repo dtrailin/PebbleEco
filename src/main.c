@@ -7,12 +7,10 @@
 static Window *s_main_window;
 
 static TextLayer *s_time_layer;
-static TextLayer *s_weather_layer;
 static TextLayer *s_location_layer;
 static TextLayer *s_aqi_layer;
 
 static GFont s_time_font;
-static GFont s_weather_font;
 static GFont s_location_font;
 static GFont s_aqi_font;
 
@@ -42,10 +40,8 @@ static void update_time() {
 
 static void main_window_load(Window *window) {
   
-  
-  
   // Create time TextLayer
-  s_time_layer = text_layer_create(GRect(5, 10, 139, 50));
+  s_time_layer = text_layer_create(GRect(5, 10, 139, 70));
   text_layer_set_background_color(s_time_layer, GColorWhite);
   text_layer_set_text_color(s_time_layer, GColorBlack);
   text_layer_set_text(s_time_layer, "00:00");
@@ -59,21 +55,9 @@ static void main_window_load(Window *window) {
 
   // Add it as a child layer to the Window's root layer
   layer_add_child(window_get_root_layer(window), text_layer_get_layer(s_time_layer));
-  
-  // Create temperature Layer
-  s_weather_layer = text_layer_create(GRect(0, 130, 144, 25));
-  text_layer_set_background_color(s_weather_layer, GColorWhite);
-  text_layer_set_text_color(s_weather_layer, GColorBlack);
-  text_layer_set_text_alignment(s_weather_layer, GTextAlignmentCenter);
-  text_layer_set_text(s_weather_layer, "Loading...");
-  
-  // Create second custom font, apply it and add to Window
-  s_weather_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_PERFECT_DOS_20));
-  text_layer_set_font(s_weather_layer, s_weather_font);
-  layer_add_child(window_get_root_layer(window), text_layer_get_layer(s_weather_layer));
 
   // Create location layer
-  s_location_layer = text_layer_create(GRect(0, 70, 150, 50)); // 2nd value changes y position, 1st value changes x positon
+  s_location_layer = text_layer_create(GRect(5, 70, 139, 50)); // 2nd value changes y position, 1st value changes x positon
   text_layer_set_background_color(s_location_layer, GColorWhite);
   text_layer_set_text_color(s_location_layer, GColorBlack);
   text_layer_set_text_alignment(s_location_layer, GTextAlignmentCenter);
@@ -111,9 +95,10 @@ static void main_window_unload(Window *window) {
   // Destroy TextLayer
   text_layer_destroy(s_time_layer);
   
-  // Destroy weather elements
-  text_layer_destroy(s_weather_layer);
-  fonts_unload_custom_font(s_weather_font);
+  // Destroy location elements
+  text_layer_destroy(s_location_layer);
+  fonts_unload_custom_font(s_location_font);
+  
 }
 
 static void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
