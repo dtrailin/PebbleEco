@@ -57,7 +57,7 @@ static void main_window_load(Window *window) {
   layer_add_child(window_get_root_layer(window), text_layer_get_layer(s_time_layer));
 
   // Create location layer
-  s_location_layer = text_layer_create(GRect(5, 70, 139, 50)); // 2nd value changes y position, 1st value changes x positon
+  s_location_layer = text_layer_create(GRect(5, 65, 139, 50)); // 2nd value changes y position, 1st value changes x positon
   text_layer_set_background_color(s_location_layer, GColorWhite);
   text_layer_set_text_color(s_location_layer, GColorBlack);
   text_layer_set_text_alignment(s_location_layer, GTextAlignmentCenter);
@@ -68,7 +68,7 @@ static void main_window_load(Window *window) {
   layer_add_child(window_get_root_layer(window), text_layer_get_layer(s_location_layer));
 
   // Create aqi layer
-  s_aqi_layer = text_layer_create(GRect(0, 50, 144, 25)); // 2nd value changes y position, 1st value changes x positon
+  s_aqi_layer = text_layer_create(GRect(0, 119 , 144, 25)); // 2nd value changes y position, 1st value changes x positon
   text_layer_set_background_color(s_aqi_layer, GColorWhite);
   text_layer_set_text_color(s_aqi_layer, GColorBlack);
   text_layer_set_text_alignment(s_aqi_layer, GTextAlignmentCenter);
@@ -76,7 +76,9 @@ static void main_window_load(Window *window) {
   // Create custom font for air quality index, apply it and add to Window
   s_aqi_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_PERFECT_DOS_20));
   text_layer_set_font(s_aqi_layer, s_aqi_font);
+  layer_add_child(window_get_root_layer(window), text_layer_get_layer( s_location_layer ));
   layer_add_child(window_get_root_layer(window), text_layer_get_layer(s_aqi_layer));
+
     
   // Make sure the time is displayed from the start
   update_time();
@@ -157,6 +159,8 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
   // Assemble full string and display
   snprintf(location_buffer, sizeof(location_buffer), "%s, %s", city_buffer, state_buffer);
   text_layer_set_text(s_location_layer, location_buffer);
+  
+  
   
 }
 
