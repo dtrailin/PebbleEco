@@ -5,11 +5,16 @@
 #define KEY_STATE 2  
   
 static Window *s_main_window;
+
 static TextLayer *s_time_layer;
 static TextLayer *s_weather_layer;
+static TextLayer *s_location_layer;
+static TextLayer *s_aqi_layer;
 
 static GFont s_time_font;
 static GFont s_weather_font;
+static GFont s_location_font;
+static GFont s_aqi_font;
 
 static BitmapLayer *s_background_layer;
 static GBitmap *s_background_bitmap;
@@ -66,7 +71,31 @@ static void main_window_load(Window *window) {
   s_weather_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_PERFECT_DOS_20));
   text_layer_set_font(s_weather_layer, s_weather_font);
   layer_add_child(window_get_root_layer(window), text_layer_get_layer(s_weather_layer));
-  
+
+  // Create location layer
+  s_location_layer = text_layer_create(GRect(0, 70, 150, 50)); // 2nd value changes y position, 1st value changes x positon
+  text_layer_set_background_color(s_location_layer, GColorWhite);
+  text_layer_set_text_color(s_location_layer, GColorBlack);
+  text_layer_set_text_alignment(s_location_layer, GTextAlignmentCenter);
+  text_layer_set_text(s_location_layer, "Vancouver");
+
+  // Create custom font for location layer, apply it and add to Window
+  s_location_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_PERFECT_DOS_20));
+  text_layer_set_font(s_location_layer, s_location_font);
+  layer_add_child(window_get_root_layer(window), text_layer_get_layer(s_location_layer));
+
+  // Create aqi layer
+  s_aqi_layer = text_layer_create(GRect(0, 50, 144, 25)); // 2nd value changes y position, 1st value changes x positon
+  text_layer_set_background_color(s_aqi_layer, GColorWhite);
+  text_layer_set_text_color(s_aqi_layer, GColorBlack);
+  text_layer_set_text_alignment(s_aqi_layer, GTextAlignmentCenter);
+  text_layer_set_text(s_aqi_layer, "AQI: 3");
+
+  // Create custom font for air quality index, apply it and add to Window
+  s_aqi_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_PERFECT_DOS_20));
+  text_layer_set_font(s_aqi_layer, s_aqi_font);
+  layer_add_child(window_get_root_layer(window), text_layer_get_layer(s_aqi_layer));
+    
   // Make sure the time is displayed from the start
   update_time();
 }
