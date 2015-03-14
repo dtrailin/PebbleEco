@@ -20,18 +20,19 @@ function locationSuccess(pos) {
       // responseText contains a JSON object with weather info
       var json = JSON.parse(responseText);
 
-      // Temperature in Kelvin requires adjustment
       var AQI = json[0].AQI;
       console.log("AQI is " + AQI);
-
-      // Conditions
-      var conditions = null;      
-      //console.log("Conditions are " + conditions);
+      var city = json[0].ReportingArea;
+       console.log("City is " + city);
+      var state = json[0].StateCode;
+        console.log("state is " + state);
       
       // Assemble dictionary using our keys
       var dictionary = {
-      // "KEY_TEMPERATURE": temperature,
-        "KEY_CONDITIONS": conditions
+       "KEY_AQI": AQI,
+        "KEY_CITY": city,
+        "KEY_STATE": state
+        
       };
 
       // Send to Pebble
