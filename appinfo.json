@@ -1,7 +1,10 @@
 {
-    "appKeys": {},
+    "appKeys": {
+        "car_rate": 0
+    },
     "capabilities": [
-        ""
+        "location",
+        "configurable"
     ],
     "companyName": "hiyou102@gmail.com",
     "longName": "NWHacksTest",
@@ -15,6 +18,6 @@
     "versionCode": 1,
     "versionLabel": "1.0",
     "watchapp": {
-        "watchface": false
+        "watchface": true
     }
 }
