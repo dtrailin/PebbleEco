@@ -29,9 +29,9 @@ function locationSuccess(pos) {
       
       // Assemble dictionary using our keys
       var dictionary = {
-       "KEY_AQI": AQI,
-        "KEY_CITY": city,
-        "KEY_STATE": state
+       'KEY_AQI': AQI,
+        'KEY_CITY' : city,
+        'KEY_STATE' : state
         
       };
 

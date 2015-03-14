@@ -1,7 +1,8 @@
 #include <pebble.h>
   
-#define KEY_TEMPERATURE 0
-#define KEY_CONDITIONS 1
+#define KEY_AQI 0
+#define KEY_CITY 1
+#define KEY_STATE 2  
   
 static Window *s_main_window;
 static TextLayer *s_time_layer;
