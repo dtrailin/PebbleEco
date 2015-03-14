@@ -77,7 +77,6 @@ static void main_window_load(Window *window) {
   text_layer_set_background_color(s_location_layer, GColorWhite);
   text_layer_set_text_color(s_location_layer, GColorBlack);
   text_layer_set_text_alignment(s_location_layer, GTextAlignmentCenter);
-  text_layer_set_text(s_location_layer, "Vancouver");
 
   // Create custom font for location layer, apply it and add to Window
   s_location_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_PERFECT_DOS_20));
@@ -89,7 +88,6 @@ static void main_window_load(Window *window) {
   text_layer_set_background_color(s_aqi_layer, GColorWhite);
   text_layer_set_text_color(s_aqi_layer, GColorBlack);
   text_layer_set_text_alignment(s_aqi_layer, GTextAlignmentCenter);
-  text_layer_set_text(s_aqi_layer, "AQI: 3");
 
   // Create custom font for air quality index, apply it and add to Window
   s_aqi_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_PERFECT_DOS_20));
@@ -137,10 +135,11 @@ static void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
 
 static void inbox_received_callback(DictionaryIterator *iterator, void *context) {
   // Store incoming information
-  static char temperature_buffer[8];
-  static char conditions_buffer[32];
-  static char weather_layer_buffer[32];
-  
+  static char aqi_buffer[8];
+  static char city_buffer[32];
+  static char state_buffer[8];
+  static char location_buffer[32];
+
   // Read first item
   Tuple *t = dict_read_first(iterator);
 
@@ -148,12 +147,19 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
   while(t != NULL) {
     // Which key was received?
     switch(t->key) {
-    case KEY_TEMPERATURE:
-      snprintf(temperature_buffer, sizeof(temperature_buffer), "%dC", (int)t->value->int32);
+
+    case KEY_AQI:
+      snprintf(aqi_buffer, sizeof(aqi_buffer), "%dC", (int)t->value->int32);
       break;
-    case KEY_CONDITIONS:
-      snprintf(conditions_buffer, sizeof(conditions_buffer), "%s", t->value->cstring);
+
+    case KEY_CITY:
+      snprintf(city_buffer, sizeof(city_buffer), "%s", t->value->cstring);
       break;
+
+    case KEY_STATE:
+      snprintf(state_buffer, sizeof(state_buffer), "%s", t->value->cstring);
+      break;
+
     default:
       APP_LOG(APP_LOG_LEVEL_ERROR, "Key %d not recognized!", (int)t->key);
       break;
@@ -164,8 +170,9 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
   }
   
   // Assemble full string and display
-  snprintf(weather_layer_buffer, sizeof(weather_layer_buffer), "%s, %s", temperature_buffer, conditions_buffer);
-  text_layer_set_text(s_weather_layer, weather_layer_buffer);
+  snprintf(location_buffer, sizeof(location_buffer), "%s, %s", city_buffer, state_buffer);
+  text_layer_set_text(s_location_layer, location_buffer);
+  
 }
 
 static void inbox_dropped_callback(AppMessageResult reason, void *context) {

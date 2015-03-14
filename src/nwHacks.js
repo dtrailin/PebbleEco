@@ -38,10 +38,10 @@ function locationSuccess(pos) {
       // Send to Pebble
       Pebble.sendAppMessage(dictionary,
         function(e) {
-          console.log("Weather info sent to Pebble successfully!");
+          console.log("AQI info sent to Pebble successfully!");
         },
         function(e) {
-          console.log("Error sending weather info to Pebble!");
+          console.log("Error sending AQI info to Pebble!");
         }
       );
     }      
@@ -52,7 +52,7 @@ function locationError(err) {
   console.log("Error requesting location!");
 }
 
-function getWeather() {
+function getAQI() {
   navigator.geolocation.getCurrentPosition(
     locationSuccess,
     locationError,
@@ -66,7 +66,7 @@ Pebble.addEventListener('ready',
     console.log("PebbleKit JS ready!");
 
     // Get the initial weather
-    getWeather();
+    getAQI();
   }
 );
 
@@ -74,6 +74,6 @@ Pebble.addEventListener('ready',
 Pebble.addEventListener('appmessage',
   function(e) {
     console.log("AppMessage received!");
-    getWeather();
+    getAQI();
   }                     
 );
