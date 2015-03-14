@@ -10,7 +10,13 @@
     "longName": "NWHacksTest",
     "projectType": "native",
     "resources": {
-        "media": []
+        "media": [
+            {
+                "file": "fonts/perfect-dos-vga.ttf",
+                "name": "FONT_PERFECT_DOS_20",
+                "type": "font"
+            }
+        ]
     },
     "sdkVersion": "2",
     "shortName": "NWHacksTest",
