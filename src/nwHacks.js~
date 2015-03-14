@@ -20,7 +20,7 @@ function locationSuccess(pos) {
       var json = JSON.parse(responseText);
 
       // Temperature in Kelvin requires adjustment
-      var AQI = json[0].AQI;
+      var AQI = json.[0].AQI;
       console.log("AQI is " + AQI);
 
       // Conditions
