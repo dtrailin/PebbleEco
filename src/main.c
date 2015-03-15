@@ -41,7 +41,7 @@ static void update_time() {
 static void main_window_load(Window *window) {
   
   // Create time TextLayer
-  s_time_layer = text_layer_create(GRect(5, 10, 139, 70));
+  s_time_layer = text_layer_create(GRect(5, 20, 139, 70));
   text_layer_set_background_color(s_time_layer, GColorWhite);
   text_layer_set_text_color(s_time_layer, GColorBlack);
   text_layer_set_text(s_time_layer, "00:00");
@@ -57,9 +57,9 @@ static void main_window_load(Window *window) {
   layer_add_child(window_get_root_layer(window), text_layer_get_layer(s_time_layer));
 
   // Create location layer
-  s_location_layer = text_layer_create(GRect(5, 65, 139, 50)); // 2nd value changes y position, 1st value changes x positon
-  text_layer_set_background_color(s_location_layer, GColorWhite);
-  text_layer_set_text_color(s_location_layer, GColorBlack);
+  s_location_layer = text_layer_create(GRect(0, 120, 145, 50)); // 2nd value changes y position, 1st value changes x positon
+  text_layer_set_background_color(s_location_layer, GColorBlack);
+  text_layer_set_text_color(s_location_layer, GColorWhite);
   text_layer_set_text_alignment(s_location_layer, GTextAlignmentCenter);
 
   // Create custom font for location layer, apply it and add to Window
@@ -68,9 +68,9 @@ static void main_window_load(Window *window) {
   layer_add_child(window_get_root_layer(window), text_layer_get_layer(s_location_layer));
 
   // Create aqi layer
-  s_aqi_layer = text_layer_create(GRect(0, 119 , 144, 25)); // 2nd value changes y position, 1st value changes x positon
-  text_layer_set_background_color(s_aqi_layer, GColorWhite);
-  text_layer_set_text_color(s_aqi_layer, GColorBlack);
+  s_aqi_layer = text_layer_create(GRect(0, 90 , 144, 25)); // 2nd value changes y position, 1st value changes x positon
+  text_layer_set_background_color(s_aqi_layer, GColorBlack);
+  text_layer_set_text_color(s_aqi_layer, GColorWhite);
   text_layer_set_text_alignment(s_aqi_layer, GTextAlignmentCenter);
 
   // Create custom font for air quality index, apply it and add to Window
