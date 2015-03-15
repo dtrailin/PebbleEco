@@ -3,6 +3,7 @@
 #define KEY_AQI 0
 #define KEY_CITY 1
 #define KEY_STATE 2  
+#define KEY_STATUS 3
   
 static Window *s_main_window;
 
@@ -123,9 +124,12 @@ static void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
 static void inbox_received_callback(DictionaryIterator *iterator, void *context) {
   // Store incoming information
   static char aqi_buffer[8];
+  static char airstatus_buffer[32];
   static char city_buffer[32];
   static char state_buffer[8];
   static char location_buffer[32];
+  static char status_buffer[32];
+  
 
   // Read first item
   Tuple *t = dict_read_first(iterator);
@@ -146,7 +150,12 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
     case KEY_STATE:
       snprintf(state_buffer, sizeof(state_buffer), "%s", t->value->cstring);
       break;
-
+           
+     case KEY_STATUS:
+      snprintf(status_buffer, sizeof(status_buffer), "%s", t->value->cstring);
+      break;    
+ 
+      
     default:
       APP_LOG(APP_LOG_LEVEL_ERROR, "Key %d not recognized!", (int)t->key);
       break;
@@ -160,7 +169,10 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
   snprintf(location_buffer, sizeof(location_buffer), "%s, %s", city_buffer, state_buffer);
   text_layer_set_text(s_location_layer, location_buffer);
   
-  text_layer_set_text(s_aqi_layer, aqi_buffer);
+  snprintf(airstatus_buffer, sizeof(airstatus_buffer), "%s, %s", aqi_buffer, status_buffer);
+  
+  
+  text_layer_set_text(s_aqi_layer, airstatus_buffer);
   
 }
 

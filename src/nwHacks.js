@@ -26,12 +26,14 @@ function locationSuccess(pos) {
        console.log("City is " + city);
       var state = json[0].StateCode;
         console.log("state is " + state);
+      var status = json[0].Category.Name;
       
       // Assemble dictionary using our keys
       var dictionary = {
        'KEY_AQI': AQI,
         'KEY_CITY' : city,
-        'KEY_STATE' : state
+        'KEY_STATE' : state,
+        'KEY_STATUS' : status
         
       };
 

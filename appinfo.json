@@ -2,7 +2,8 @@
     "appKeys": {
         "KEY_AQI": 0,
         "KEY_CITY": 1,
-        "KEY_STATE": 2
+        "KEY_STATE": 2,
+        "KEY_STATUS": 3
     },
     "capabilities": [
         "location",
@@ -15,12 +16,12 @@
         "media": [
             {
                 "file": "fonts/perfect-dos-vga.ttf",
-                "name": "FONT_PERFECT_DOS_20",
+                "name": "FONT_PERFECT_DOS_48",
                 "type": "font"
             },
             {
                 "file": "fonts/perfect-dos-vga.ttf",
-                "name": "FONT_PERFECT_DOS_48",
+                "name": "FONT_PERFECT_DOS_20",
                 "type": "font"
             }
         ]
