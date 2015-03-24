@@ -14,7 +14,7 @@ function locationSuccess(pos) {
   
  console.log(url);
 
-  // Send request to OpenWeatherMap
+  // Send request to Airnow
   xhrRequest(url, 'GET', 
     function(responseText) {
       // responseText contains a JSON object with weather info
@@ -67,7 +67,7 @@ Pebble.addEventListener('ready',
   function(e) {
     console.log("PebbleKit JS ready!");
 
-    // Get the initial weather
+    // Get the initial AQi
     getAQI();
   }
 );
