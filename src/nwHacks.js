@@ -10,7 +10,7 @@ var xhrRequest = function (url, type, callback) {
 function locationSuccess(pos) {
   // Construct URL
   var url = "http://www.airnowapi.org/aq/observation/latLong/current/?format=application/json&latitude=" + pos.coords.latitude + "&longitude=" + 
-      pos.coords.longitude +"&distance=100&API_KEY=89116BB2-7154-4A28-BB40-F3525D0C66BC" ;
+      pos.coords.longitude +"&distance=50&API_KEY=89116BB2-7154-4A28-BB40-F3525D0C66BC" ;
   
  console.log(url);
 
